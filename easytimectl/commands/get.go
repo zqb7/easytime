@@ -13,9 +13,15 @@ func init() {
 
 var getCmd = &cobra.Command{
 	Use:   "get",
-	Short: "",
-	Run: func(cmd *cobra.Command, args []string) {
+	Short: "转换时间",
+	RunE: func(cmd *cobra.Command, args []string) error {
 		t, err := easytime.Get(args[0])
-		fmt.Println(t, err)
+		if err != nil {
+			return err
+		}
+		PARSE_TIME = t
+		ShiftRun(cmd)
+		fmt.Println(easytime.TimeStd(PARSE_TIME))
+		return nil
 	},
 }

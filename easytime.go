@@ -172,3 +172,8 @@ func Get(s string) (t time.Time, err error) {
 	}
 	return t, nil
 }
+
+func TimeStd(t time.Time) string {
+	zone, _ := t.Zone()
+	return fmt.Sprintf("date:%s,zone:%s,timestamp:%d", t.Format(time.RFC3339), zone, t.Unix())
+}
