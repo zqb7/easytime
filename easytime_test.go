@@ -19,6 +19,8 @@ func TestGet(t *testing.T) {
 		{s: "978282000", wont: time.Date(2001, 1, 1, 1, 0, 0, 0, time.Local)},
 		{s: "2023-01-09 15:39:00", wont: time.Date(2023, 1, 9, 15, 39, 0, 0, time.Local)},
 		{s: "2023-01-09", wont: time.Date(2023, 1, 9, 00, 00, 0, 0, time.Local)},
+		{s: "20230109", wont: time.Date(2023, 1, 9, 00, 00, 0, 0, time.Local)},
+		{s: "2023-0109", wont: time.Date(2023, 1, 9, 00, 00, 0, 0, time.Local)},
 	}
 	for _, tt := range tests {
 		v, err := Get(tt.s)

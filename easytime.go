@@ -33,8 +33,8 @@ var TimeFormats = []TimeFormat{
 	{"YYYY.M.DD", "2006.1.02"},
 	{"YYYY.M.D", "2006.1.2"},
 	{"YYYYMMDD", "20060102"},
-	{"YYYY-DDDD", "2006-002"},
-	{"YYYYDDDD", "2006002"},
+	{"YYYY-DDDD", "2006-0002"},
+	{"YYYYDDDD", "20060002"},
 	{"YYYY-MM", "2006-01"},
 	{"YYYY/MM", "2006/01"},
 	{"YYYY.MM", "2006.01"},
@@ -67,10 +67,6 @@ func isTimestamp(s string) (int64, bool) {
 }
 
 func Get(s string) (t time.Time, err error) {
-	if timestamp, ok := isTimestamp(s); ok {
-		return time.UnixMicro(timestamp), nil
-	}
-
 	var hasSpaceDivider = strings.Contains(s, " ")
 	var hasT_Divider = strings.Contains(s, "T")
 	numSpaces := strings.Count(s, " ")
@@ -160,12 +156,19 @@ func Get(s string) (t time.Time, err error) {
 			formats[index] += TZFormat
 		}
 	}
+	var isMatchFormat bool
 	for _, f := range formats {
 		t, err = time.Parse(f, s)
 		if err != nil {
 			continue
 		}
+		isMatchFormat = true
 		break
+	}
+	if !isMatchFormat {
+		if timestamp, ok := isTimestamp(s); ok {
+			return time.UnixMicro(timestamp), nil
+		}
 	}
 	if t.IsZero() {
 		return t, ErrInvalidTimeFormat
