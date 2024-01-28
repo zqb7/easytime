@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/qilook/easytime"
+	"github.com/qilook/easytime/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -18,6 +18,6 @@ var nowCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		PARSE_TIME = time.Now()
 		ShiftRun(cmd)
-		fmt.Println(easytime.TimeStd(PARSE_TIME))
+		fmt.Println(utils.TimeStd(PARSE_TIME))
 	},
 }
