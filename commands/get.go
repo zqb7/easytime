@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/qilook/easytime/pkg/utils"
 	"github.com/spf13/cobra"
@@ -15,7 +16,7 @@ var getCmd = &cobra.Command{
 	Use:   "get",
 	Short: "转换时间",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		t, err := utils.Get(args[0])
+		t, err := utils.Get(strings.Join(args, " "))
 		if err != nil {
 			return err
 		}
