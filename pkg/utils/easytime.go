@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"regexp"
@@ -177,6 +178,17 @@ func Get(s string) (t time.Time, err error) {
 }
 
 func TimeStd(t time.Time) string {
-	zone, _ := t.Zone()
-	return fmt.Sprintf("date:%s,zone:%s,timestamp:%d", t.Format(time.RFC3339), zone, t.Unix())
+	var buff = bytes.NewBuffer(nil)
+	fmt.Fprintf(buff, "date: %s", t.Format(time.RFC3339))
+	fmt.Fprintln(buff)
+
+	fmt.Fprintf(buff, "timestamp: %d", t.Unix())
+	fmt.Fprintln(buff)
+
+	fmt.Fprintf(buff, "weekday: %d", t.Weekday())
+	fmt.Fprintln(buff)
+
+	zeroDate := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location())
+	fmt.Fprintf(buff, "zero_timestamp: %d", zeroDate.Unix())
+	return buff.String()
 }
