@@ -13,7 +13,7 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "easytimectl",
+	Use:   "easytime",
 	Short: "",
 	Run:   func(cmd *cobra.Command, args []string) {},
 	PersistentPostRunE: func(cmd *cobra.Command, args []string) error {
