@@ -2,7 +2,7 @@
 
 ## install
 ```
-go install github.com/qilook/easytime@latest
+go install github.com/zqb7/easytime@latest
 ```
 ## Usage
 ```

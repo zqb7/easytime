@@ -1,4 +1,4 @@
-module github.com/qilook/easytime
+module github.com/zqb7/easytime
 
 go 1.20
 
